@@ -126,7 +126,7 @@ const App: React.FC = () => {
         <header className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-2">
             <YouTubeIcon />
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
               サムネイルダウンローダー
             </h1>
           </div>
@@ -144,7 +144,7 @@ const App: React.FC = () => {
               placeholder="ここにYouTube動画のURLを貼り付け"
               className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500 focus:outline-none transition-all duration-300 text-lg"
             />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-3">
                  <button
                     type="submit"
                     disabled={isLoading}
