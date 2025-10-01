@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useRef } from 'react';
 
 const YouTubeIcon = () => (
@@ -6,11 +5,11 @@ const YouTubeIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-8 h-8 text-red-500"
+    className="w-7 h-7 text-red-500"
   >
     <path
       fillRule="evenodd"
-      d="M19.802 5.378a3.18 3.18 0 012.247 2.25c.14 1.34.151 4.22.151 4.372s-.01 3.032-.15 4.372a3.18 3.18 0 01-2.248 2.25c-1.724.18-8.602.18-8.602.18s-6.878 0-8.602-.18a3.18 3.18 0 01-2.247-2.25c-.14-1.34-.151-4.22-.151-4.372s.01-3.032.15-4.372a3.18 3.18 0 012.247-2.25c1.724-.18 8.602-.18 8.602-.18s6.878 0 8.602.18zM9.544 14.531V9.469L14.73 12l-5.186 2.531z"
+      d="M19.802 5.378a3.18 3.18 0 012.247 2.25c.14 1.34.151 4.22.151 4.372s-.01 3.032-.15 4.372a3.18 3.18 0 01-2.248 2.25c-1.724.18-8.602.18-8.602.18s-6.878 0-8.602-.18a3.18 3.18 0 01-2.247-2.25c-.14-1.34-.151-4.22-.151-4.372s.01-3.032.15-4.372a3.18 3.18 0 012.247-2.25c1.724-.18 8.602-.18 8.602.18s6.878 0 8.602.18zM9.544 14.531V9.469L14.73 12l-5.186 2.531z"
       clipRule="evenodd"
     />
   </svg>
@@ -27,7 +26,6 @@ const ClearIcon = () => (
         <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
     </svg>
 );
-
 
 const App: React.FC = () => {
   const [url, setUrl] = useState<string>('');
@@ -69,9 +67,7 @@ const App: React.FC = () => {
     if (id) {
         setVideoId(id);
         const maxResUrl = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
-        // We set the highest resolution first, and let the <img> onError handle fallbacks.
         setThumbnailUrl(maxResUrl);
-        // We assume loading is done once the URL is set. The image element will handle the actual loading.
         setTimeout(() => setIsLoading(false), 500);
     } else {
         setError('有効なYouTube動画のURLではありません。');
@@ -81,7 +77,6 @@ const App: React.FC = () => {
 
   const handleImageError = useCallback(() => {
     if (videoId) {
-        // If maxresdefault fails, try sddefault as a high-quality fallback.
         const sdUrl = `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`;
         if (imgRef.current && imgRef.current.src !== sdUrl) {
             imgRef.current.src = sdUrl;
@@ -121,16 +116,16 @@ const App: React.FC = () => {
   }, [thumbnailUrl, videoId]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-4 sm:p-6 font-sans">
-      <div className="w-full max-w-xl mx-auto">
-        <header className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-2">
+    <div className="min-h-screen text-gray-100 flex flex-col items-center p-4 pt-8 sm:pt-12 font-sans">
+      <div className="w-full max-w-md mx-auto">
+        <header className="text-center mb-6">
+          <div className="flex items-center justify-center gap-2 mb-2">
             <YouTubeIcon />
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tighter">
               サムネダウンローダー
             </h1>
           </div>
-          <p className="text-gray-400 text-md leading-relaxed">
+          <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
             YouTube動画のURLを貼るだけで<br />簡単ダウンロード
           </p>
         </header>
@@ -142,20 +137,20 @@ const App: React.FC = () => {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="ここにYouTube動画のURLを貼り付け"
-              className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500 focus:outline-none transition-all duration-300 text-lg"
+              className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500 focus:outline-none transition-all duration-300 text-base placeholder-gray-500"
             />
-            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-3">
+            <div className="flex flex-col gap-3">
                  <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50"
+                    className="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 disabled:bg-blue-500 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50"
                   >
                     {isLoading ? '取得中...' : 'サムネイルを取得'}
                   </button>
                   <button
                     type="button"
                     onClick={resetState}
-                    className="w-full flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-xl transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-gray-500/50"
+                    className="w-full flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-gray-500/50"
                   >
                     <ClearIcon />
                     クリア
@@ -163,7 +158,7 @@ const App: React.FC = () => {
             </div>
           </form>
 
-          <div className="mt-8 text-center min-h-[250px] flex items-center justify-center">
+          <div className="mt-8 text-center min-h-[280px] flex items-center justify-center">
             {isLoading && (
               <div className="flex flex-col items-center">
                 <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -175,15 +170,15 @@ const App: React.FC = () => {
             )}
             
             {error && (
-                <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl w-full">
+                <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg w-full">
                     <p className="font-bold">エラー</p>
                     <p className="text-sm">{error}</p>
                 </div>
             )}
 
             {thumbnailUrl && !error && (
-              <div className="w-full flex flex-col items-center gap-6 animate-fade-in">
-                <div className="w-full aspect-video bg-gray-800 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+              <div className="w-full flex flex-col items-center gap-4 animate-fade-in-scale">
+                <div className="w-full aspect-video bg-gray-800 rounded-xl overflow-hidden shadow-lg shadow-black/30">
                     <img
                         ref={imgRef}
                         src={thumbnailUrl}
@@ -196,7 +191,7 @@ const App: React.FC = () => {
                 <button
                   onClick={handleDownload}
                   disabled={isDownloading}
-                  className="w-full sm:w-auto flex items-center justify-center bg-green-600 hover:bg-green-700 disabled:bg-green-800 disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-xl transition-colors duration-300 text-lg focus:outline-none focus:ring-4 focus:ring-green-500/50"
+                  className="w-full max-w-xs flex items-center justify-center bg-green-600 hover:bg-green-700 disabled:bg-green-500 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 text-base hover:shadow-lg hover:shadow-green-500/20 focus:outline-none focus:ring-4 focus:ring-green-500/50"
                 >
                   <DownloadIcon />
                   {isDownloading ? 'ダウンロード中...' : 'ダウンロード'}
