@@ -126,12 +126,12 @@ const App: React.FC = () => {
         <header className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-2">
             <YouTubeIcon />
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-              サムネイルダウンローダー
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              サムネダウンローダー
             </h1>
           </div>
-          <p className="text-gray-400 text-md">
-            YouTube動画のURLを貼るだけで簡単ダウンロード
+          <p className="text-gray-400 text-md leading-relaxed">
+            YouTube動画のURLを貼るだけで<br />簡単ダウンロード
           </p>
         </header>
 

@@ -1,5 +1,6 @@
+
 {
-  "name": "YouTubeサムネイルダウンローダー",
+  "name": "サムネダウンローダー",
   "description": "YouTube動画のURLを貼り付けるだけで、高画質なサムネイルを簡単に表示・ダウンロードできるスマートフォン向けウェブアプリです。",
   "requestFramePermissions": []
 }
